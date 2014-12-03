@@ -6,38 +6,38 @@
 //  Copyright (c) 2014 Fabian Canas. All rights reserved.
 //
 
+#import <Sequence/SEQUSequence.h>
+
 SpecBegin(InitialSpecs)
 
-describe(@"these will fail", ^{
-
-    it(@"can do maths", ^{
-        expect(1).to.equal(2);
-    });
-
-    it(@"can read", ^{
-        expect(@"number").to.equal(@"string");
+describe(@"Sequence", ^{
+    
+    it(@"can have an array", ^{
+        SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+        expect(s.array).notTo.beNil;
     });
     
-    it(@"will wait and fail", ^AsyncBlock {
-        
-    });
-});
-
-describe(@"these will pass", ^{
-    
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
-    });
-    
-    it(@"can read", ^{
-        expect(@"team").toNot.contain(@"I");
-    });
-    
-    it(@"will wait and succeed", ^AsyncBlock {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            done();
+    describe(@"map", ^{
+        it(@"should return a sequence with a non-nil array", ^{
+            SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+            s = [s map:^id(NSNumber *n) {
+                return @([n integerValue] + 1);
+            }];
+            expect(s.array).toNot.beNil();
         });
     });
+    
+    it(@"can map identities", ^{
+        SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+        s = [s map:^id(NSNumber *n) {
+            return @([n integerValue] + 1);
+        }];
+        expect(s.array[0]).to.equal(2);
+        expect(s.array[1]).to.equal(3);
+        expect(s.array[2]).to.equal(4);
+        expect(s.array[3]).to.equal(5);
+    });
+    
 });
 
 SpecEnd
