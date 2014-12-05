@@ -1,6 +1,6 @@
 # Sequence
 
-[![CI Status](http://img.shields.io/travis/Fabian Canas/Sequence.svg?style=flat)](https://travis-ci.org/Fabian Canas/Sequence)
+[![CI Status](http://img.shields.io/travis/fcanas/Sequence.svg?style=flat)](https://travis-ci.org/fcanas/Sequence)
 <!-- [![Version](https://img.shields.io/cocoapods/v/Sequence.svg?style=flat)](http://cocoadocs.org/docsets/Sequence) -->
 <!-- [![License](https://img.shields.io/cocoapods/l/Sequence.svg?style=flat)](http://cocoadocs.org/docsets/Sequence) -->
 <!-- [![Platform](https://img.shields.io/cocoapods/p/Sequence.svg?style=flat)](http://cocoadocs.org/docsets/Sequence) -->
