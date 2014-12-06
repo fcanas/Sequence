@@ -16,7 +16,9 @@ To run the tests, clone the repo, and run `pod install` from the Example directo
 Sequence is available through [CocoaPods](http://cocoapods.org), though you'd be insane to use it. To install
 it, simply add the following line to your Podfile:
 
-    pod "Sequence", git: 'https://github.com/fcanas/Sequence.git'
+```ruby
+pod "Sequence", git: 'https://github.com/fcanas/Sequence.git'
+```
 
 ## Author
 
