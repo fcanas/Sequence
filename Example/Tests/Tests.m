@@ -13,13 +13,13 @@ SpecBegin(InitialSpecs)
 describe(@"Sequence", ^{
     
     it(@"can have an array", ^{
-        SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+        SEQUSequence *s = [SEQUSequence sequenceWithArray:@[@1, @2, @3, @4]];
         expect(s.array).notTo.beNil;
     });
     
     describe(@"map", ^{
         it(@"should return a sequence with a non-nil array", ^{
-            SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+            SEQUSequence *s = [SEQUSequence sequenceWithArray:@[@1, @2, @3, @4]];
             s = [s map:^id(NSNumber *n) {
                 return @([n integerValue] + 1);
             }];
@@ -28,7 +28,7 @@ describe(@"Sequence", ^{
     });
     
     it(@"can map identities", ^{
-        SEQUSequence *s = [[SEQUSequence alloc] initWithArray:@[@1, @2, @3, @4]];
+        SEQUSequence *s = [SEQUSequence sequenceWithArray:@[@1, @2, @3, @4]];
         s = [s map:^id(NSNumber *n) {
             return @([n integerValue] + 1);
         }];

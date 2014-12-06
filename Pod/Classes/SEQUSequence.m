@@ -9,24 +9,38 @@
 #import "SEQUSequence.h"
 
 @interface SEQUSequence () {
-    NSArray *_array;
     NSArray *_outArray;
 }
+
+@property (nonatomic, copy) NSArray *backingArray;
 @property (nonatomic, strong) NSArray *maps;
+
+- (instancetype)initWithArray:(NSArray *)array NS_DESIGNATED_INITIALIZER;
+
 @end
 
-
 @implementation SEQUSequence
+
+- (instancetype)init
+{
+    self = [self initWithArray:@[]];
+    return self;
+}
 
 - (instancetype)initWithArray:(NSArray *)array
 {
     self = [super init];
     if (self) {
-        _array = array;
+        _backingArray = [array copy];
         _maps = @[];
         _outArray = nil;
     }
     return self;
+}
+
++ (instancetype)sequenceWithArray:(NSArray *)array
+{
+    return [[self alloc] initWithArray:array];
 }
 
 - (instancetype)initWithArray:(NSArray *)array maps:(NSArray *)maps
@@ -40,15 +54,16 @@
 
 - (SEQUSequence *)map:(id(^)(id))block
 {
-    return [[SEQUSequence alloc] initWithArray:_array maps:[self.maps arrayByAddingObject:[block copy]]];
+    return [[SEQUSequence alloc] initWithArray:self.backingArray
+                                          maps:[self.maps arrayByAddingObject:[block copy]]];
 }
 
 - (NSArray *)array
 {
     if (_outArray == nil) {
-        NSMutableArray *a = [NSMutableArray arrayWithCapacity:_array.count];
-        [_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            for ( id(^block)(id) in self.maps) {
+        NSMutableArray *a = [NSMutableArray arrayWithCapacity:self.backingArray.count];
+        [self.backingArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            for ( id(^block)(id) in self.maps ) {
                 [a addObject:block(obj)];
             }
         }];

@@ -10,9 +10,9 @@
 
 @interface SEQUSequence : NSObject
 
-@property (nonatomic, readonly) NSArray *array;
++ (instancetype)sequenceWithArray:(NSArray *)array;
 
-- (instancetype)initWithArray:(NSArray *)array;
+- (NSArray *)array;
 
 - (SEQUSequence *)map:(id(^)(id))block;
 
